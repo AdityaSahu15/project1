@@ -1,15 +1,25 @@
 import React, { useState } from 'react';
 import login from '../photos/login.jpeg';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
+import { useEffect } from 'react';
 
 const Login = () => {
+  const{user,setUser}=useContext(UserContext)
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   const navigate = useNavigate(); // ✅ Correct usage inside component
 
+   useEffect(() => {
+      if (isAuthenticated) {
+        navigate('/login/userInfo');
+      }
+    }, [isAuthenticated, navigate]);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  if (isAuthenticated) {
-    navigate('/login/userInfo')
-  }
+    useEffect(()=>{
+      console.log(user)
+    },[user])
 
   const [formData, setFormData] = useState({
     email: '',
@@ -42,7 +52,10 @@ const Login = () => {
       console.log('Response from backend:', data);
       alert(data.message)
       if (data.message === "User logged in Successfully")
+      {
+        setUser(data);
         setIsAuthenticated(true)
+      }
 
 
     } catch (error) {

@@ -1,16 +1,14 @@
 // EditInfo.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { UpdatedInfoContext } from '../UpdatedInfoContext';
 
 function EditInfo({ field }) {
-  const [inputValue, setInputValue] = useState('');
+  const { inputValue, setInputValue, setField } = useContext(UpdatedInfoContext);
 
   const handleChange = (e) => {
+    setField(field);
     setInputValue(e.target.value);
   };
-
-//   useEffect(()=>{
-//     console.log(inputValue)
-//   },[inputValue])
 
   return (
     <div className="p-4 bg-white rounded border shadow border-blue-300">
@@ -22,7 +20,6 @@ function EditInfo({ field }) {
         type="text"
         value={inputValue}
         onChange={handleChange}
-       
         className="w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
       />
     </div>

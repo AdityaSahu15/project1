@@ -1,20 +1,37 @@
 // UserOutlet.jsx
 import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
+import { UpdatedInfoContext } from "../UpdatedInfoContext"; // ✅ new import
 import UserDashboardMenu from "./UserDashboardMenu";
 
 const UserOutlet = () => {
   const { user } = useContext(UserContext);
+  const { field, inputValue } = useContext(UpdatedInfoContext); // ✅ use context
   const [showMenu, setShowMenu] = useState(false);
 
   const handleEditClick = () => {
     setShowMenu((prev) => !prev);
   };
 
-  const handleSaveClick = () => {
-    // Logic to save the changes
-
+  const handleSaveClick = async (e) => {
+    console.log("Saving:", field, inputValue); // Replace with actual save logic
     
+   try {
+    const res=await fetch('/api/login/register/userInfo',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({field,inputValue}), // Send the field and inputValue
+      })
+
+      const data = await res.json();
+      console.log('Response from backend:', data); // response mai updated user ka info fetch karwa lenge 
+    
+   } catch (error) {
+    console.log(error)
+   }
+
   };
 
   return (
