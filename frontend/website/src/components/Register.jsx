@@ -10,7 +10,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/login/register/userInfo');
+      navigate('/login'); // after registering we will redirect the user to login and thus proceed further 
     }
   }, [isAuthenticated, navigate]);
 

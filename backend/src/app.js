@@ -33,7 +33,6 @@ app.post('/api/login/register', (req, res) => {
 
 app.post('/api/login/register',registerUser)
 app.post('/api/login',loginUser)
-app.post('/api/login/register/userInfo',updateUser)
 app.post('/api/login/userInfo',verifyJWT,updateUser)
 
 export {app}

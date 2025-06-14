@@ -161,7 +161,7 @@ const updateUser = asyncHandler(async (req, res) => {
     update.email=inputValue
   }
 
-  if(field === "Username"){
+  if(field === "UserName"){
     update.userName=inputValue;
   }
   if(field === "Contact"){

@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const UserOutlet = () => {
   const { user ,setUser} = useContext(UserContext);
-  const { field, inputValue } = useContext(UpdatedInfoContext); // ✅ use context
+  const { field, inputValue,setField,setInputValue } = useContext(UpdatedInfoContext); // ✅ use context
   const [showMenu, setShowMenu] = useState(false);
 
   // useEffect(()=>{
@@ -44,11 +44,14 @@ const UserOutlet = () => {
             [field === "Name" ? "fullName" :
              field === "Email" ? "email" :
              field === "UserName" ? "userName" :
-             field === "Contact" ? "contactNo" : field
+             field === "Contact" ? "contact" : field
             ]: inputValue
           }
         }));
         setShowMenu(false)
+        setField(null)
+        setInputValue(null)
+        
       }
 
       
@@ -71,7 +74,7 @@ const UserOutlet = () => {
           <p><span className="font-medium">Name:</span> {user?.data.fullName ||  "—" }</p>
           <p><span className="font-medium">Email:</span> {user?.data.email || "—"}</p>
           <p><span className="font-medium">Username:</span> {user?.data.userName || "—"}</p>
-          <p><span className="font-medium">Contact:</span> {user?.data.contactNo || "—"}</p>
+          <p><span className="font-medium">Contact:</span> {user?.data.contact || "—"}</p>
         </div>
 
         <div className="flex justify-between mt-6">

@@ -26,7 +26,7 @@ const userSchema = new Schema({
             trim:true,
             unique:true,
         },
-        contactNo:{
+        contact:{
             type:Number,
             unique:true
         }
