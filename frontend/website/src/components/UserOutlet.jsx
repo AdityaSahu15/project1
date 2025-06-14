@@ -4,6 +4,8 @@ import { UserContext } from "../UserContext";
 import { UpdatedInfoContext } from "../UpdatedInfoContext"; // ✅ new import
 import UserDashboardMenu from "./UserDashboardMenu";
 import { useEffect } from "react";
+import { asyncHandler } from "../../../../backend/src/utils/asyncHandler";
+import { useNavigate } from "react-router-dom";
 
 const UserOutlet = () => {
   const { user ,setUser} = useContext(UserContext);
@@ -13,6 +15,9 @@ const UserOutlet = () => {
   // useEffect(()=>{
   //   console.log(user)
   //   },[user])
+
+
+  const navigate=useNavigate();
 
   const handleEditClick = () => {
     setShowMenu((prev) => !prev);
@@ -63,6 +68,28 @@ const UserOutlet = () => {
 
   };
 
+
+
+  const handleLogoutClick=async()=>{
+    const res=await fetch('/api/login/userInfo/logout',
+      {
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials:'include'
+        // there won't be any body that we would be sending while logging out
+      }
+    )
+    const data=await res.json()
+    alert(data.message)
+    // after logging out we would navigate or redirect to home page
+    navigate('/home')
+   
+
+  }
+
+
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col items-center justify-center px-4">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-md w-full border border-blue-200">
@@ -97,7 +124,7 @@ const UserOutlet = () => {
       </div>
 
       <div className="mt-10">
-        <button
+        <button onClick={handleLogoutClick}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded mt-32 cursor-pointer"
         >
           Log Out

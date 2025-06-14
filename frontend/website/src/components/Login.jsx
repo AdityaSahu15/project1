@@ -9,7 +9,7 @@ const Login = () => {
   const{user,setUser}=useContext(UserContext)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
-  const navigate = useNavigate(); // ✅ Correct usage inside component
+  const navigate = useNavigate(); 
 
    useEffect(() => {
       if (isAuthenticated) {
@@ -17,9 +17,9 @@ const Login = () => {
       }
     }, [isAuthenticated, navigate]);
 
-    useEffect(()=>{
-      console.log(user)
-    },[user])
+    // useEffect(()=>{
+    //   console.log(user)
+    // },[user])
 
   const [formData, setFormData] = useState({
     email: '',
