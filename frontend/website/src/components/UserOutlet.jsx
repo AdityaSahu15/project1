@@ -3,11 +3,16 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import { UpdatedInfoContext } from "../UpdatedInfoContext"; // ✅ new import
 import UserDashboardMenu from "./UserDashboardMenu";
+import { useEffect } from "react";
 
 const UserOutlet = () => {
-  const { user } = useContext(UserContext);
+  const { user ,setUser} = useContext(UserContext);
   const { field, inputValue } = useContext(UpdatedInfoContext); // ✅ use context
   const [showMenu, setShowMenu] = useState(false);
+
+  // useEffect(()=>{
+  //   console.log(user)
+  //   },[user])
 
   const handleEditClick = () => {
     setShowMenu((prev) => !prev);
@@ -16,19 +21,40 @@ const UserOutlet = () => {
   const handleSaveClick = async (e) => {
     console.log("Saving:", field, inputValue); // Replace with actual save logic
     
+    
    try {
-    const res=await fetch('/api/login/register/userInfo',{
+    const res=await fetch('/api/login/userInfo',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({field,inputValue}), // Send the field and inputValue
+        credentials: 'include'   // it is used to send cookies along with the req 
       })
 
       const data = await res.json();
       console.log('Response from backend:', data); // response mai updated user ka info fetch karwa lenge 
+      
+      if(res.ok)
+      {
+         setUser(prev => ({
+          ...prev,
+          data: {
+            ...prev.data,
+            [field === "Name" ? "fullName" :
+             field === "Email" ? "email" :
+             field === "UserName" ? "userName" :
+             field === "Contact" ? "contactNo" : field
+            ]: inputValue
+          }
+        }));
+        setShowMenu(false)
+      }
+
+      
     
-   } catch (error) {
+   } 
+   catch (error) {
     console.log(error)
    }
 
@@ -42,7 +68,7 @@ const UserOutlet = () => {
         </h2>
 
         <div className="space-y-3 text-blue-700 text-base">
-          <p><span className="font-medium">Name:</span> {user?.data.fullName || "—"}</p>
+          <p><span className="font-medium">Name:</span> {user?.data.fullName ||  "—" }</p>
           <p><span className="font-medium">Email:</span> {user?.data.email || "—"}</p>
           <p><span className="font-medium">Username:</span> {user?.data.userName || "—"}</p>
           <p><span className="font-medium">Contact:</span> {user?.data.contactNo || "—"}</p>

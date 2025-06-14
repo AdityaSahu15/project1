@@ -6,10 +6,12 @@ import { User } from "../models/user.model.js";
 
 export const verifyJWT =asyncHandler(async(req,_,next)=>{
 try {
+    console.log("verifyJWT middleware called");
+
         
 
         // req ke pass cookies ka access h .. using cookie parser
-        const token=req.cookies?.accessToken  || req.header("Authorization")?.replace("Bearer ","")
+        const token=req.cookies?.accessToken 
     
         if(!token){
             throw new ApiError(401,"Unauthorized request")
@@ -28,6 +30,7 @@ try {
     }
     
     req.user=user;
+    
     //All following middleware and route handlers know who is making the request.
     
     next()

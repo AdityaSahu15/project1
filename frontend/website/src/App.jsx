@@ -16,6 +16,7 @@ import Register from './components/Register';
 import UserOutlet from './components/UserOutlet';
 import { UserContext } from './UserContext';
 import { UpdatedInfoContext } from './UpdatedInfoContext'; // ✅ New import
+import { useEffect } from 'react';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,9 +33,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // the global user state (instance of the user )
   const [field, setField] = useState(''); // after  login and registration the fields we wish to add/edit 
   const [inputValue, setInputValue] = useState(''); // the actual thing with which we want to replace the existing field value
+
+ 
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

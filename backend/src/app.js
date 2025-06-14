@@ -2,6 +2,7 @@ import express from "express"
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import { registerUser,loginUser, updateUser } from "./controllers/user.controller.js";
+import { verifyJWT } from "./middlewares/auth.middleware.js";
 
 const app = express();
 
@@ -33,5 +34,6 @@ app.post('/api/login/register', (req, res) => {
 app.post('/api/login/register',registerUser)
 app.post('/api/login',loginUser)
 app.post('/api/login/register/userInfo',updateUser)
+app.post('/api/login/userInfo',verifyJWT,updateUser)
 
 export {app}

@@ -7,6 +7,27 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
 import { User } from "../models/user.model.js"
 
+
+const generateAccessAndRefreshTokens=async (userId)=>{
+    try {
+  const user=await User.findById(userId)
+  const accessToken=user.generateAccessToken()
+  const refreshToken=user.generateRefreshToken()
+
+  user.refreshToken=refreshToken
+  await  user.save({validateBeforeSave:false})
+
+  return {accessToken,refreshToken}
+
+} catch (error) {
+  throw new ApiError(500,"Something went wrong while generating refresh and access token")
+}
+}
+
+
+
+
+
 const registerUser = asyncHandler(async (req, res) => {
 
   const { email, password } = req.body
@@ -101,25 +122,69 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
    const createdUser = await User.findById(user._id).select("-password")
+  // console.log(createdUser)
+
+   const {accessToken,refreshToken}=await  generateAccessAndRefreshTokens(user._id)
+
+    const options={
+    httpOnly:true,
+    secure:true
+   } 
 
    //req.user=createdUser
 
   return res.status(200)
+  .cookie("accessToken",accessToken,options)
+  .cookie("refreshToken",refreshToken,options)
     .json(
       new ApiResponse(200, createdUser,"User logged in Successfully")
     )
 
 })
 
-const updateUser=asyncHandler(async(req,res)=>{
-  console.log(req.body)
+const updateUser = asyncHandler(async (req, res) => {
+  console.log("BODY:", req.body);
+  console.log("req.user:", req.user);
 
-  const{field,inputValue}=req.body;
+  const { field, inputValue } = req.body;
+
+  if (!req.user?._id) {
+    return res.status(401).json({ message: "User not authenticated" });
+  }
+
+  let update = {};
+  if (field === "Name") {
+    update.fullName = inputValue;
+  }
+
+  if(field  === "Email"){
+    update.email=inputValue
+  }
+
+  if(field === "Username"){
+    update.userName=inputValue;
+  }
+  if(field === "Contact"){
+    update.contact=inputValue;
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user._id,
+    { $set: update },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  console.log("Updated user:", updatedUser);
+
+  if (!updatedUser) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
   
 
+  res.status(200).json({ message: "User updated", user: updatedUser });
+});
 
-
-})
 
 
 export { registerUser,loginUser,updateUser }
