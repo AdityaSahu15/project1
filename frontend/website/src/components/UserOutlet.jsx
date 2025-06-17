@@ -4,8 +4,9 @@ import { UserContext } from "../UserContext";
 import { UpdatedInfoContext } from "../UpdatedInfoContext"; // ✅ new import
 import UserDashboardMenu from "./UserDashboardMenu";
 import { useEffect } from "react";
-import { asyncHandler } from "../../../../backend/src/utils/asyncHandler";
 import { useNavigate } from "react-router-dom";
+
+
 
 const UserOutlet = () => {
   const { user ,setUser} = useContext(UserContext);
@@ -82,9 +83,14 @@ const UserOutlet = () => {
       }
     )
     const data=await res.json()
-    alert(data.message)
+    //alert(data.message)
     // after logging out we would navigate or redirect to home page
-    navigate('/home')
+    
+
+    setTimeout(() => {
+      
+      navigate('/home')
+    }, 1000);
    
 
   }

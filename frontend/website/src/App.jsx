@@ -17,6 +17,11 @@ import UserOutlet from './components/UserOutlet';
 import { UserContext } from './UserContext';
 import { UpdatedInfoContext } from './UpdatedInfoContext'; // ✅ New import
 import { useEffect } from 'react';
+import ProductPage from './components/ProductPage';
+
+
+
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +33,7 @@ const router = createBrowserRouter(
       <Route path='/login/userInfo' element={<UserOutlet />} />
       <Route path='/orders' element={<Orders />} />
       <Route path='/cart' element={<Cart />} />
+      <Route path='/products' element={<ProductPage/>}/>
     </Route>
   )
 );
