@@ -3,7 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 import { registerUser,loginUser, updateUser, logoutUser } from "./controllers/user.controller.js";
 import { verifyJWT } from "./middlewares/auth.middleware.js";
-
+import { getAllProducts ,getProductById} from "./controllers/product.controller.js";
 const app = express();
 
 app.use(cors({
@@ -35,5 +35,7 @@ app.post('/api/login/register',registerUser)
 app.post('/api/login',loginUser)
 app.post('/api/login/userInfo',verifyJWT,updateUser)
 app.post('/api/login/userInfo/logout',verifyJWT,logoutUser)
+app.get('/api/products',getAllProducts)
+app.get('/api/products/:id',getProductById)
 
 export {app}

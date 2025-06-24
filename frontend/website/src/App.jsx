@@ -18,7 +18,7 @@ import { UserContext } from './UserContext';
 import { UpdatedInfoContext } from './UpdatedInfoContext'; // ✅ New import
 import { useEffect } from 'react';
 import ProductPage from './components/ProductPage';
-
+import ProductDetails from './components/ProductDetails';
 
 
 
@@ -34,6 +34,8 @@ const router = createBrowserRouter(
       <Route path='/orders' element={<Orders />} />
       <Route path='/cart' element={<Cart />} />
       <Route path='/products' element={<ProductPage/>}/>
+      <Route path="/products/:id" element={<ProductDetails />} />
+      <Route path=''/>
     </Route>
   )
 );
