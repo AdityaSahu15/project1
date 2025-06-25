@@ -38,4 +38,12 @@ app.post('/api/login/userInfo/logout',verifyJWT,logoutUser)
 app.get('/api/products',getAllProducts)
 app.get('/api/products/:id',getProductById)
 
+
+app.get('/api/login/userInfo', verifyJWT, (req, res) => {
+  res.status(200).json({
+    message: "User verified",
+    data: req.user
+  });
+});
+
 export {app}

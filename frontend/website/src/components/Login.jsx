@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import { useEffect } from 'react';
+import UserOutlet from './UserOutlet';
 
 const Login = () => {
   const{user,setUser}=useContext(UserContext)
@@ -12,10 +13,10 @@ const Login = () => {
   const navigate = useNavigate(); 
 
    useEffect(() => {
-      if (isAuthenticated) {
+      if (isAuthenticated ) {
         navigate('/login/userInfo');
       }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate,user]);
 
     // useEffect(()=>{
     //   console.log(user)
@@ -47,6 +48,7 @@ const Login = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData), // Send form data as JSON
+        
       })
       const data = await res.json();
       console.log('Response from backend:', data);
@@ -66,6 +68,8 @@ const Login = () => {
   const registerButtonClickHandle = () => {
     navigate('/login/register'); // ✅ Navigates to nested route
   };
+
+ 
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-blue-100 px-4 flex-col">
@@ -119,9 +123,11 @@ const Login = () => {
         </button>
       </div>
 
-      <Outlet />
+     
     </div>
   );
 };
+
+
 
 export default Login;

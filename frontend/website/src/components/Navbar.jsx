@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom'
 import cart from '../photos/cart.png';
 import login from '../photos/login.jpeg';
 import logo from '../photos/logo.jpeg';
+import { UserContext } from '../UserContext';
+import { useContext } from 'react';
 
 function Navbar() {
+
+    const {user}=useContext(UserContext)
     return (
         <div className='navbar bg-blue-300 text-black p-4 text-xl flex justify-evenly'>
 
@@ -25,7 +29,7 @@ function Navbar() {
 
             <div className='flex gap-x-2 cursor-pointer'>
                 <img src={login} alt="login" style={{ width: '30px', height: 'auto' }}  className='rounded-2xl'/>
-                <NavLink to='/login' className='hover:font-semibold'>
+                <NavLink to={user ? "/login/userInfo" : "/login"} className='hover:font-semibold'>
                     User
                 </NavLink>
 

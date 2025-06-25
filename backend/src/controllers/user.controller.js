@@ -77,9 +77,6 @@ const loginUser = asyncHandler(async (req, res) => {
   req.body se email aur password lenge 
   pehle verify karenge ki email id registered h bhi ya nhi 
   uske baad we will check check if the password is correct or not  
-  
-  
-  
   */
   console.log(req.body);
   const { email, password } = req.body;
@@ -201,6 +198,8 @@ const logoutUser=asyncHandler(async(req,res)=>{
   secure:true
  } 
 
+ 
+
  return res.status(200)
  .clearCookie("accessToken",options)
  .clearCookie("refreshToken",options)
@@ -208,6 +207,10 @@ const logoutUser=asyncHandler(async(req,res)=>{
 })
 
 
+const getUser=asyncHandler(async(req,res)=>{
 
+  
+
+})
 
 export { registerUser,loginUser,updateUser,logoutUser }

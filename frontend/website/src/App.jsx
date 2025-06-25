@@ -15,7 +15,7 @@ import Footer from './components/Footer';
 import Register from './components/Register';
 import UserOutlet from './components/UserOutlet';
 import { UserContext } from './UserContext';
-import { UpdatedInfoContext } from './UpdatedInfoContext'; // ✅ New import
+import { UpdatedInfoContext } from './UpdatedInfoContext'; 
 import { useEffect } from 'react';
 import ProductPage from './components/ProductPage';
 import ProductDetails from './components/ProductDetails';
@@ -29,7 +29,6 @@ const router = createBrowserRouter(
       <Route path='/home' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/login/register' element={<Register />} />
-      <Route path='/login/register/userInfo' element={<UserOutlet />} />
       <Route path='/login/userInfo' element={<UserOutlet />} />
       <Route path='/orders' element={<Orders />} />
       <Route path='/cart' element={<Cart />} />
@@ -41,9 +40,28 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [user, setUser] = useState(null); // the global user state (instance of the user )
+  const [user, setUser] = useState(undefined); // the global user state (instance of the user )
   const [field, setField] = useState(''); // after  login and registration the fields we wish to add/edit 
   const [inputValue, setInputValue] = useState(''); // the actual thing with which we want to replace the existing field value
+
+useEffect(() => {
+  const fetchUser = async () => {
+    try {
+      const res = await fetch("/api/login/userInfo", {
+        method: "GET",
+        credentials: "include",
+      });
+      const result = await res.json();
+      setUser(res.ok ? result : null);  // here earlier we were setting the user with result.data .... but we did not need to do that since in the login componnent we are fetching the data by .. e.g. user?.data?.fullName   issiliye dikkat aa rhi thi
+    } catch {
+      setUser(null);
+    }
+  };
+
+  fetchUser();
+}, []);
+
+
 
  
 
