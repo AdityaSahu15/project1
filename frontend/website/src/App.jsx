@@ -61,6 +61,8 @@ useEffect(() => {
   fetchUser();
 }, []);
 
+// basically on every refresh we check if we already have a user logged in like in almost most of the websites .... if user has already logged in then on refresh we must preserve that state 
+
 
 
  

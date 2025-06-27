@@ -6,11 +6,15 @@ import { UserContext } from '../UserContext';
 import { useEffect } from 'react';
 import UserOutlet from './UserOutlet';
 
+import { useLocation } from 'react-router-dom';
+
 const Login = () => {
   const{user,setUser}=useContext(UserContext)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   const navigate = useNavigate(); 
+  const location=useLocation();
+  const message=location?.state?.message;
 
    useEffect(() => {
       if (isAuthenticated ) {
@@ -66,13 +70,27 @@ const Login = () => {
   };
 
   const registerButtonClickHandle = () => {
-    navigate('/login/register'); // ✅ Navigates to nested route
+    navigate('/login/register'); //  Navigates to nested route
   };
 
  
 
   return (
+
+    <>
+
+  
+
     <div className="min-h-screen flex items-center justify-center bg-blue-100 px-4 flex-col">
+
+      <div>
+      {message && (
+  <div className="text-red-600 text-xl font-semibold text-center mb-20 rounded-md max-w-md mx-auto  animate-pulse">
+    {message}
+  </div>
+)}
+    </div>
+
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -113,6 +131,8 @@ const Login = () => {
         </form>
       </div>
 
+
+      {!message &&
       <div className='mt-20 gap-2 text-center'>
         <h1 className='font-semibold text-md mb-2'>Not a user already?</h1>
         <button
@@ -121,10 +141,12 @@ const Login = () => {
         >
           Register
         </button>
-      </div>
+      </div>}
 
      
     </div>
+
+    </>
   );
 };
 

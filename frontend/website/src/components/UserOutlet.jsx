@@ -39,7 +39,7 @@ if (user === null) return <Navigate to="/login" replace />;
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({field,inputValue}), // Send the field and inputValue
-        credentials: 'include'   // it is used to send cookies along with the req 
+        credentials: 'include'   // it is used to send cookies along with the req , before updation we need to make sure of who the user is therefore we send cookie along because it contains the access and refresh token thus we can verify the user 
       })
 
       const data = await res.json();
@@ -89,6 +89,7 @@ if (user === null) return <Navigate to="/login" replace />;
     )
     const data=await res.json()
     setUser(undefined);
+
     
     //alert(data.message)
     // after logging out we would navigate or redirect to home page
