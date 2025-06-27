@@ -13,7 +13,7 @@ function Cart() {
       if(!user)
     navigate('/login',{
   state: {
-    message: "Please login first to see the cart"
+    message: "Please login first to see your Cart"
   }
 })
   },[user,navigate])
