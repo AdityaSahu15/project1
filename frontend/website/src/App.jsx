@@ -44,6 +44,9 @@ function App() {
   const [field, setField] = useState(''); // after  login and registration the fields we wish to add/edit 
   const [inputValue, setInputValue] = useState(''); // the actual thing with which we want to replace the existing field value
 
+  const[cartItems,setCartItems]=useState([]);
+
+
 useEffect(() => {
   const fetchUser = async () => {
     try {
@@ -68,7 +71,7 @@ useEffect(() => {
  
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser,cartItems,setCartItems }}>
       <UpdatedInfoContext.Provider value={{ field, setField, inputValue, setInputValue }}>
         <RouterProvider router={router} />
       </UpdatedInfoContext.Provider>

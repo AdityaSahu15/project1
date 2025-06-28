@@ -36,9 +36,9 @@ const ProductPage = () => {
                 <p className="text-gray-600 text-sm mt-1">{product.productDescription}</p>
                 <div className="mt-3 flex justify-between items-center">
                   <span className="text-lg font-bold text-green-600">₹{product.productPrice}</span>
-                  <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition text-sm cursor-pointer">
+                  {/* <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition text-sm cursor-pointer">
                     Add to Cart
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
