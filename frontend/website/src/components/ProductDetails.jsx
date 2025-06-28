@@ -5,8 +5,10 @@ import { UserContext } from "../UserContext";
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const[message,setMessage]=useState('');
 
   const {user}=useContext(UserContext);
+
 
 
       const fetchProduct = async () => {
@@ -26,7 +28,13 @@ const ProductDetails = () => {
 
 
   const handleAddToCart=async()=>{
+    if(!user)
+    {
+      setMessage("Login to add items")
+      return;
+    }
 
+   
     const res=await fetch('/api/cart/add',{
         method: 'POST',
         headers: {
@@ -47,6 +55,8 @@ const ProductDetails = () => {
   if (!product) return <div className="text-center py-10">Loading...</div>;
 
  return (
+<>
+
   <div className="max-w-4xl mx-auto p-6 bg-white shadow rounded mt-10 mb-10">
     <div className="flex justify-center">
       <img
@@ -67,8 +77,15 @@ const ProductDetails = () => {
     <button onClick={handleAddToCart} className="mt-6 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition cursor-pointer">
       Add to Cart
     </button>
+
+    {message && <p  className="text-red-600 text-sm mt-2">{message}</p>}
+
     
   </div>
+
+  
+
+  </>
 );
 ;
 ;
