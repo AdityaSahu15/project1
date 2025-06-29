@@ -54,5 +54,30 @@ import { asyncHandler } from "../utils/asyncHandler.js";
   }
 });
 
+//update Cart
 
-export {addToCart,getCart}
+ const updateCartQuantity = asyncHandler(async (req, res) => {
+  const { productId, type } = req.body;  // type denotes whether it is an increase or decrease
+  const userId = req.user._id;
+
+  const cart = await Cart.findOne({ userId });
+  if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+  const index = cart.items.findIndex(
+    (item) => item.productId.toString() === productId
+  );
+  if (index === -1) return res.status(404).json({ message: "Item not found in cart" });
+
+  if (type === "inc") {
+    cart.items[index].quantity += 1;
+  } else if (type === "dec" && cart.items[index].quantity > 1) {
+    cart.items[index].quantity -= 1;
+  }
+
+  await cart.save();
+  res.status(200).json(cart);
+});
+
+
+
+export {addToCart,getCart,updateCartQuantity}

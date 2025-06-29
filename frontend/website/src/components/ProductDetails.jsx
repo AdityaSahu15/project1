@@ -31,6 +31,7 @@ const ProductDetails = () => {
     if(!user)
     {
       setMessage("Login to add items")
+      setTimeout(() => setMessage(""), 2000);
       return;
     }
 
@@ -78,7 +79,7 @@ const ProductDetails = () => {
       Add to Cart
     </button>
 
-    {message && <p  className="text-red-600 text-sm mt-2">{message}</p>}
+    {message && <p  className="text-red-600 text-sm mt-2 animate-pulse">{message}</p>}
 
     
   </div>
