@@ -4,7 +4,7 @@ import cors from "cors"
 import { registerUser,loginUser, updateUser, logoutUser } from "./controllers/user.controller.js";
 import { verifyJWT } from "./middlewares/auth.middleware.js";
 import { getAllProducts ,getProductById} from "./controllers/product.controller.js";
-import { addToCart,getCart,updateCartQuantity } from "./controllers/cart.controller.js";
+import { addToCart,getCart,updateCartQuantity,deleteCartItem } from "./controllers/cart.controller.js";
 const app = express();
 
 app.use(cors({
@@ -50,5 +50,5 @@ app.get('/api/login/userInfo', verifyJWT, (req, res) => {
 app.post('/api/cart/add',verifyJWT,addToCart)
 app.get('/api/cart',verifyJWT,getCart)
 app.put('/api/cart/update',verifyJWT,updateCartQuantity)
-
+app.delete('/api/cart/delete',verifyJWT,deleteCartItem)
 export {app}

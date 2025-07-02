@@ -27,9 +27,15 @@ const verifyUser=async()=>{
       setUser(data?.data)
       setloading(true);
     }
+    else{
+      setUser(null)
+    }
 
   } catch (error) {
     console.log(error)
+    setUser(null)
+  }finally{
+    setloading(true)
   }
 }
 
@@ -37,7 +43,9 @@ useEffect(()=>{
   verifyUser()
 },[])
 
-  useEffect(()=>{
+
+
+useEffect(()=>{
 
       if(!user && loading)
     navigate('/login',{
@@ -66,7 +74,7 @@ useEffect(()=>{
 
   useEffect(() => {
     if (user) fetchCart();
-  }, [user]);
+  }, [user,cartItems]);
 
 
 
@@ -100,9 +108,43 @@ useEffect(()=>{
 };
 
 
+const deleteItem=async(productId)=>{
+
+  try {
+    
+    const res=await fetch("/api/cart/delete",{
+    method:"DELETE",
+    headers: {
+        "Content-Type": "application/json",
+      },
+      credentials:"include",
+      body: JSON.stringify({productId}),  
+  })
+
+  const data=res.json();
+  console.log(data);
+
+  if(res.ok)
+  {
+    setCartItems(data.items || [])
+  }
+  else
+  {
+    console.log(data.message)
+  }  
+  } catch (error) {
+    console.log(error.message)
+  }
+
+}
+
+
+
+
 
 
   return (
+    <>
     <div className=" h-screen max-w-4xl mx-auto p-6 mt-10">
       <h1 className="text-2xl font-bold text-blue-800 mb-6">Your Cart</h1>
       <div className="space-y-4">
@@ -125,6 +167,9 @@ useEffect(()=>{
                   <button onClick={()=>updateQuantity(item.productId._id,"dec")} className='bg-blue-300 w-5 rounded hover:bg-blue-400 cursor-pointer'>-</button>
                   <button onClick={()=>updateQuantity(item.productId._id,"inc")} className='bg-blue-300 w-5 rounded hover:bg-blue-400 cursor-pointer'>+</button></div>
                 </div>
+                <button onClick={()=> deleteItem(item.productId._id)} className='bg-red-700 p-1 rounded mt-3 cursor-pointer text-gray-200 transition duration-300'>
+                  Remove item
+                </button>
                 
               </div>
             </div>
@@ -134,7 +179,10 @@ useEffect(()=>{
           </div>
         ))}
       </div>
+      <p className='text-xl font-semibold mt-2 '>Total:</p>
     </div>
+
+    </>
   )
 }
 

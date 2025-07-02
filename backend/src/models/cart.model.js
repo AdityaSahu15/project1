@@ -21,6 +21,10 @@ const cartSchema = new mongoose.Schema({
     unique: true, // One cart per user
   },
   items: [cartItemSchema],
+  subTotal:{
+    type:Number,
+    default:0
+  }
 }, { timestamps: true });
 
 export const Cart= mongoose.model("Cart", cartSchema);

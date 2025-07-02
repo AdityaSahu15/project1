@@ -1,5 +1,5 @@
 // UserOutlet.jsx
-import React, { useContext, useState } from "react";
+import React, { useContext, useState,useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { UpdatedInfoContext } from "../UpdatedInfoContext"; // ✅ new import
 import UserDashboardMenu from "./UserDashboardMenu";
@@ -11,18 +11,47 @@ const UserOutlet = () => {
   const { user ,setUser} = useContext(UserContext);
   const { field, inputValue,setField,setInputValue } = useContext(UpdatedInfoContext); // ✅ use context
   const [showMenu, setShowMenu] = useState(false);
+  const[loading,setLoading]=useState(false);
 
   
   const navigate=useNavigate();
 
-    if (user === undefined) return <div className="flex items-center justify-center min-h-screen bg-gray-100">
+
+  const verifyUser=async()=>{
+  try {
+    const res=await fetch('/api/login/userInfo',{
+      method: "GET",
+      credentials: "include",
+    })
+
+    const data=await res.json();
+   // console.log(data.data);
+
+    if(res.ok )
+    {
+      setUser(data)
+      setLoading(true);
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+useEffect(()=>{
+  verifyUser()
+},[])
+
+
+
+    if (user === undefined && loading) return <div className="flex items-center justify-center min-h-screen bg-gray-100">
   <div className="animate-spin h-12 w-12 border-4 border-t-blue-600 border-gray-300 rounded-full"></div>
   <span className="ml-4 text-xl font-medium text-gray-700">
     Logging out...
   </span>
 </div>
 
-if (user === null) return <Navigate to="/login" replace />;
+if (user === null && loading) return <Navigate to="/login" replace />;
 
   const handleEditClick = () => {
     setShowMenu((prev) => !prev);
