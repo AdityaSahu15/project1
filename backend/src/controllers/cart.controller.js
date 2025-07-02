@@ -45,8 +45,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
     const cart = await Cart.findOne({ userId }).populate("items.productId");
 
     if (!cart) {
-      return res.status(200).json({ items: [] });
+      return res.status(200).json({ items: [],subTotal:0 });
     }
+
+    cart.subTotal = cart.items.reduce((total, item) => {
+  return total + item.productId.productPrice * item.quantity;
+}, 0);
 
     res.status(200).json(cart);
   } catch (error) {
@@ -103,45 +107,8 @@ const deleteCartItem = asyncHandler(async (req, res) => {
   });
 });
 
-/*
-
-Example Cart Document (before populate):
-{
-  userId: "123",
-  items: [
-    {
-      productId: "abc123", // Just an ID
-      quantity: 2
-    }
-  ]
-}
 
 
-
-After .populate("items.productId"):
-{
-  userId: "123",
-  items: [
-    {
-      productId: {
-        _id: "abc123",
-        name: "iPhone 15",
-        price: 999,
-        stock: 10
-      },
-      quantity: 2
-    }
-  ]
-}
-
-earlier i though for updation and deletion i just need to give the product id and the user id .. 
-the cart will be fetched based on user id... then after that i have my cart ... 
-whatever changes i need to do i a particular product be it addition or deletion i can do it ...
- from the frontend we can send iten.productId... but we have populated the product field thereby we require item.productId._id
-
-
-
-*/
 
 
 
