@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import cart from '../photos/cart.png';
 import login from '../photos/login.jpeg';
-import logo from '../photos/logo.jpeg';
+import logo from '../photos/logo.png';
 import { UserContext } from '../UserContext';
 import { useContext } from 'react';
 

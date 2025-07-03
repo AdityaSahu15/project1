@@ -87,6 +87,36 @@ function Cart() {
     }
   };
 
+
+ const buyItems = async () => {
+  setLoading(true);
+  setMessage(""); // clear previous messages
+
+  try {
+    const res = await fetch("/api/order/place", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    const data = await res.json();
+    console.log(data)
+
+    if (res.ok) {
+      // ✅ Show success message or redirect to order page
+      navigate("/orders"); // or navigate("/order-success", { state: { order: data.order } })
+    } else {
+      setMessage(data.message || "Something went wrong while placing the order.");
+    }
+  } catch (err) {
+    console.error("Order placement failed:", err);
+    setMessage("Network error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 py-8 px-4">
       {message && (
@@ -154,7 +184,7 @@ function Cart() {
             <p className="text-2xl font-semibold text-green-700 mb-4 md:mb-0">
               Total: ₹{total}
             </p>
-            <button
+            <button onClick={buyItems}
               className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-8 py-3 rounded shadow-md cursor-pointer transition transform hover:scale-105"
             >
               Proceed to Buy

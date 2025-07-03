@@ -5,6 +5,7 @@ import { registerUser,loginUser, updateUser, logoutUser } from "./controllers/us
 import { verifyJWT } from "./middlewares/auth.middleware.js";
 import { getAllProducts ,getProductById} from "./controllers/product.controller.js";
 import { addToCart,getCart,updateCartQuantity,deleteCartItem } from "./controllers/cart.controller.js";
+import { getUserOrders, placeOrder } from "./controllers/order.controller.js";
 const app = express();
 
 app.use(cors({
@@ -51,4 +52,9 @@ app.post('/api/cart/add',verifyJWT,addToCart)
 app.get('/api/cart',verifyJWT,getCart)
 app.put('/api/cart/update',verifyJWT,updateCartQuantity)
 app.delete('/api/cart/delete',verifyJWT,deleteCartItem)
+
+
+app.post('/api/order/place',verifyJWT,placeOrder)
+app.get('/api/order/get',verifyJWT,getUserOrders)
+
 export {app}
