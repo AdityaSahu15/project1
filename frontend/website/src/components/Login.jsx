@@ -1,101 +1,68 @@
-import React, { useState } from 'react';
-import login from '../photos/login.jpeg';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../UserContext';
-import { useEffect } from 'react';
-import UserOutlet from './UserOutlet';
-
-import { useLocation } from 'react-router-dom';
+import login from '../photos/login.jpeg';
 
 const Login = () => {
-  const{user,setUser}=useContext(UserContext)
+  const { user, setUser } = useContext(UserContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
-  const navigate = useNavigate(); 
-  const location=useLocation();
-  const message=location?.state?.message;
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
-   useEffect(() => {
-      if (isAuthenticated ) {
-        navigate('/login/userInfo');
-      }
-    }, [isAuthenticated, navigate,user]);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const message = location?.state?.message;
 
-    // useEffect(()=>{
-    //   console.log(user)
-    // },[user])
-
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/login/userInfo');
+    }
+  }, [isAuthenticated, navigate, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login data:', formData);
-    // Add login validation / API call here
 
     try {
-
       const res = await fetch('/api/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData), // Send form data as JSON
-        
-      })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
       const data = await res.json();
-      console.log('Response from backend:', data);
-      alert(data.message)
-      if (data.message === "User logged in Successfully")
-      {
+      alert(data.message);
+      if (data.message === "User logged in Successfully") {
         setUser(data);
-        setIsAuthenticated(true)
+        setIsAuthenticated(true);
       }
-
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   const registerButtonClickHandle = () => {
-    navigate('/login/register'); //  Navigates to nested route
+    navigate('/login/register');
   };
 
- 
-
   return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-white px-4 py-10">
 
-    <>
-
-  
-
-    <div className="min-h-screen flex items-center justify-center bg-blue-100 px-4 flex-col">
-
-      <div>
+      {/* Message */}
       {message && (
-  <div className="text-red-600 text-xl font-semibold text-center mb-20 rounded-md max-w-md mx-auto  animate-pulse">
-    {message}
-  </div>
-)}
-    </div>
+        <div className="text-red-600 text-xl font-medium text-center mb-8 max-w-md animate-pulse">
+          {message}
+        </div>
+      )}
 
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Login Card */}
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-blue-200">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Welcome to ShopVerse</h2>
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
             <input
@@ -105,11 +72,11 @@ const Login = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-200"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
             <input
@@ -119,37 +86,32 @@ const Login = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-200"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-200 shadow-md cursor-pointer"
           >
             Log In
           </button>
         </form>
       </div>
 
-
-      {!message &&
-      <div className='mt-20 gap-2 text-center'>
-        <h1 className='font-semibold text-md mb-2'>Not a user already?</h1>
-        <button
-          onClick={registerButtonClickHandle}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer"
-        >
-          Register
-        </button>
-      </div>}
-
-     
+      {/* Register CTA */}
+      {!message && (
+        <div className="mt-8 text-center">
+          <h1 className="text-gray-700 mb-2 font-medium">Don't have an account?</h1>
+          <button
+            onClick={registerButtonClickHandle}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white py-2 px-6 rounded-lg font-medium transition duration-200 shadow-sm cursor-pointer"
+          >
+            Create Account
+          </button>
+        </div>
+      )}
     </div>
-
-    </>
   );
 };
-
-
 
 export default Login;

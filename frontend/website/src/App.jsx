@@ -19,6 +19,8 @@ import { UpdatedInfoContext } from './UpdatedInfoContext';
 import { useEffect } from 'react';
 import ProductPage from './components/ProductPage';
 import ProductDetails from './components/ProductDetails';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import Contact from './components/Contact';
 
 
 
@@ -34,8 +36,11 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<Cart />} />
       <Route path='/products' element={<ProductPage/>}/>
       <Route path="/products/:id" element={<ProductDetails />} />
+      <Route path='/privacyPolicy' element={<PrivacyPolicy/>}/>
+      <Route path='/contact' element={<Contact/>}/>
       <Route path=''/>
     </Route>
+    
   )
 );
 

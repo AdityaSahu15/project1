@@ -1,15 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
+
+
   return (
-    <footer className=" bg-blue-300 text-black py-6 ">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm">
-        <p className="mb-4 md:mb-0">&copy; {new Date().getFullYear()} Ecommerce. All rights reserved.</p>
-        
-        <div className="flex space-x-4">
-          <a href="/about" className="hover:underline hover:font-semibold">About</a>
-          <a href="/contact" className="hover:underline hover:font-semibold">Contact</a>
-          <a href="/privacy" className="hover:underline hover:font-semibold">Privacy Policy</a>
+    <footer className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-6">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm">
+
+        {/* Left: Copyright */}
+        <p className="mb-4 md:mb-0 text-center md:text-left">
+          &copy; {new Date().getFullYear()} <span className="font-semibold">ShopVerse</span>. All rights reserved.
+        </p>
+
+        {/* Right: Links */}
+        <div className="flex space-x-6">
+          <a href="/home" className="hover:text-yellow-300 transition duration-200">About</a>
+          <NavLink to="/contact"><p className='hover:text-yellow-300 transition duration-200'>Contact</p></NavLink>
+          <NavLink  to="/privacyPolicy"><p className='hover:text-yellow-300 transition duration-200'>Privacy Policy</p></NavLink>
+          
         </div>
       </div>
     </footer>

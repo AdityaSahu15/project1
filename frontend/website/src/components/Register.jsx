@@ -1,22 +1,17 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 
 const Register = () => {
-  const navigate = useNavigate();  // useNavigate hook
-  const { user, setUser } = useContext(UserContext); // usage of useContext
-
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/login'); // after registering we will redirect the user to login and thus proceed further 
+      navigate('/login');
     }
   }, [isAuthenticated, navigate]);
-
-  useEffect(() => {
-        //  console.log('User:', user);
-        }, [user]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -32,94 +27,72 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();// Stops the page from reloading
-    console.log('Login data:', formData);
-    // sending data from front end to backend and doing various validations 
-
-
+    e.preventDefault();
+    console.log('Register data:', formData);
 
     try {
       const res = await fetch('/api/login/register', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData), // Send form data as JSON
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
-      console.log('Response from backend:', data);
-
-      alert(data.message)
+      alert(data.message);
       if (data.message === "User registered successfully") {
-        setUser(data)
-        setIsAuthenticated(true)
+        setUser(data);
+        setIsAuthenticated(true);
       }
-
     } catch (err) {
       console.error('Error sending data:', err);
     }
-
-
   };
 
   return (
-    <>
-      <div className="min-h-screen flex items-center justify-center bg-blue-100 px-4 flex-col">
-        <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
-          <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-white px-4 py-10">
+      <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-blue-200">
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Create your account</h2>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-              />
-            </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-200"
+            />
+          </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
-              />
-            </div>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-200"
+            />
+          </div>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md cursor-pointer"
-            >
-              Register
-            </button>
-
-          </form>
-
-
-        </div>
-
-
-
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-2 rounded-lg transition-all duration-200 shadow-md cursor-pointer"
+          >
+            Register
+          </button>
+        </form>
       </div>
-
-
-
-    </>
-
+    </div>
   );
 };
 

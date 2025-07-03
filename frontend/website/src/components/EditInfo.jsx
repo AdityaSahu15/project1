@@ -11,7 +11,7 @@ function EditInfo({ field }) {
   };
 
   return (
-    <div className="p-4 bg-white rounded border shadow border-blue-300">
+    <div className="p-4 bg-white rounded border shadow border-blue-500">
       <label htmlFor="userInput" className="block text-sm text-blue-600 mb-2">
         Enter {field}:
       </label>
@@ -20,7 +20,7 @@ function EditInfo({ field }) {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        className="w-full px-3 py-2 border border-blue-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+        className="w-full px-3 py-2 border border-blue-400 rounded focus:outline-none focus:ring focus:ring-blue-300"
       />
     </div>
   );
