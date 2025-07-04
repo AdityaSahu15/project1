@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import login from '../photos/login.jpeg';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const { user, setUser } = useContext(UserContext);
@@ -59,7 +60,7 @@ const Login = () => {
 
       {/* Login Card */}
       <div className="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md border border-blue-200">
-        <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Welcome to ShopVerse</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -96,6 +97,8 @@ const Login = () => {
             Log In
           </button>
         </form>
+        <Link className='text-blue-500 underline text-sm hover:text-blue-600 block mt-2 ml-1 ' to="/forgot-password">Forgot Password?</Link>
+        
       </div>
 
       {/* Register CTA */}
@@ -110,6 +113,8 @@ const Login = () => {
           </button>
         </div>
       )}
+
+
     </div>
   );
 };

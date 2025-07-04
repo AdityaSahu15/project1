@@ -20,7 +20,7 @@ const ProductPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-white py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink py-8 px-4">
       <h1 className="text-3xl font-bold text-center text-blue-700 mb-10 tracking-wide">Explore Our Products</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">

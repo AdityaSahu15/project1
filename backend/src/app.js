@@ -6,6 +6,7 @@ import { verifyJWT } from "./middlewares/auth.middleware.js";
 import { getAllProducts ,getProductById} from "./controllers/product.controller.js";
 import { addToCart,getCart,updateCartQuantity,deleteCartItem } from "./controllers/cart.controller.js";
 import { getUserOrders, placeOrder } from "./controllers/order.controller.js";
+import { sendOTP, verifyOTPAndReset } from "./controllers/auth.controller.js";
 const app = express();
 
 app.use(cors({
@@ -56,5 +57,9 @@ app.delete('/api/cart/delete',verifyJWT,deleteCartItem)
 
 app.post('/api/order/place',verifyJWT,placeOrder)
 app.get('/api/order/get',verifyJWT,getUserOrders)
+
+
+app.post('/api/forgot-password/send-otp',sendOTP)
+app.post('/api/forgot-password/verify-otp',verifyOTPAndReset)
 
 export {app}

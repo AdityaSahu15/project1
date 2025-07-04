@@ -21,6 +21,7 @@ import ProductPage from './components/ProductPage';
 import ProductDetails from './components/ProductDetails';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
+import ForgotPassword from './components/ForgotPassword';
 
 
 
@@ -38,6 +39,7 @@ const router = createBrowserRouter(
       <Route path="/products/:id" element={<ProductDetails />} />
       <Route path='/privacyPolicy' element={<PrivacyPolicy/>}/>
       <Route path='/contact' element={<Contact/>}/>
+      <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route path=''/>
     </Route>
     
