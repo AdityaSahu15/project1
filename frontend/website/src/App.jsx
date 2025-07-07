@@ -22,6 +22,7 @@ import ProductDetails from './components/ProductDetails';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
 import ForgotPassword from './components/ForgotPassword';
+import SearchResults from './components/SearchResults';
 
 
 
@@ -29,6 +30,7 @@ import ForgotPassword from './components/ForgotPassword';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Layout />}>
+       <Route index element={<Home />} />
       <Route path='/home' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/login/register' element={<Register />} />
@@ -40,7 +42,8 @@ const router = createBrowserRouter(
       <Route path='/privacyPolicy' element={<PrivacyPolicy/>}/>
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
-      <Route path=''/>
+      <Route path="/products/search" element={<SearchResults />} />
+
     </Route>
     
   )

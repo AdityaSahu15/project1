@@ -54,7 +54,7 @@ const ProductDetails = () => {
           <img
             src={product.productImage}
             alt={product.productName}
-            className="h-96 w-full max-w-lg object-cover rounded-lg "
+            className="h-72 w-full object-contain rounded-lg "
           />
         </div>
 

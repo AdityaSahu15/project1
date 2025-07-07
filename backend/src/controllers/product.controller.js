@@ -17,4 +17,30 @@ const getProductById=asyncHandler(async(req,res)=>{
         return res.status(404).json({message:error.message})
     }
 })
-export {getAllProducts,getProductById}
+
+
+
+const searchProducts = asyncHandler(async (req, res) => {
+  const query = req.query.query?.trim();
+  console.log("🔍 Search Query:", query);
+
+  if (!query) {
+    return res.status(400).json({ message: "No search query provided" });
+  }
+
+  try {
+    const products = await Product.find({
+      productName: { $regex: query, $options: "i" }
+    });
+
+    res.status(200).json({ products });  // ✅ Wrap in object
+  } catch (error) {
+    console.error("❌ Search error:", error);
+    res.status(500).json({ message: "Failed to search products" });
+  }
+});
+
+
+
+
+export {getAllProducts,getProductById,searchProducts}
