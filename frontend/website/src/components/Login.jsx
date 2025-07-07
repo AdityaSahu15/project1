@@ -3,6 +3,8 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import login from '../photos/login.jpeg';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+
 
 const Login = () => {
   const { user, setUser } = useContext(UserContext);
@@ -26,6 +28,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+      toast.dismiss();
 
     try {
       const res = await fetch('/api/login', {
@@ -34,7 +37,8 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      alert(data.message);
+     toast[data.message === "User logged in Successfully" ? "success" : "error"](data.message);
+
       if (data.message === "User logged in Successfully") {
         setUser(data);
         setIsAuthenticated(true);

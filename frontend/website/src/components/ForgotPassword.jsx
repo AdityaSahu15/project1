@@ -32,7 +32,7 @@ const ForgotPassword = () => {
     } catch (err) {
       setMessage("Something went wrong.");
     } finally {
-      setLoadingOtp(false); // stop loader
+      setLoadingOtp(false); 
     }
   };
 
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
       const data = await res.json();
       if (res.ok) {
         setIsSuccess(true);
-        setMessage("Password reset successful ✅ Login now");
+        setMessage("Password reset successful, Login now");
         setTimeout(() => {
           navigate("/login");
         }, 2000);

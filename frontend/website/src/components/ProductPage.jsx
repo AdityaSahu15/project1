@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import { toast } from 'react-hot-toast';
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -21,10 +22,13 @@ const ProductPage = () => {
   }, []);
 
   const handleAddToCart = async (productId) => {
-    if (!user) {
-      alert("Please login to add to cart");
-      return;
-    }
+
+  if (!user) {
+  toast.dismiss(); 
+  toast.error("Please login to add to cart");
+  return;
+}
+
 
     try {
       const res = await fetch('/api/cart/add', {
@@ -35,6 +39,12 @@ const ProductPage = () => {
         credentials: "include",
         body: JSON.stringify({ productId, quantity: 1 })
       });
+
+      if(res.ok)
+      {
+        toast.dismiss(); 
+        toast.success("Item added to Cart successfully")
+      }
 
       const data = await res.json();
       console.log(data);

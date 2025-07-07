@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import { toast } from 'react-hot-toast';
 
 const SearchResults = () => {
   const [results, setResults] = useState([]);
@@ -36,7 +37,8 @@ const SearchResults = () => {
 
   const handleAddToCart = async (productId) => {
     if (!user) {
-      alert("Please login to add to cart");
+      toast.dismiss(); 
+      toast.error("Please login to add to cart");
       return;
     }
 
@@ -49,6 +51,12 @@ const SearchResults = () => {
         credentials: "include",
         body: JSON.stringify({ productId, quantity: 1 })
       });
+
+      if(res.ok)
+            {
+              toast.dismiss(); 
+              toast.success("Item added to Cart successfully")
+            }
 
       const data = await res.json();
       console.log(data);

@@ -23,7 +23,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
 import ForgotPassword from './components/ForgotPassword';
 import SearchResults from './components/SearchResults';
-
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -83,6 +83,7 @@ useEffect(() => {
   return (
     <UserContext.Provider value={{ user, setUser,cartItems,setCartItems }}>
       <UpdatedInfoContext.Provider value={{ field, setField, inputValue, setInputValue }}>
+        
         <RouterProvider router={router} />
       </UpdatedInfoContext.Provider>
     </UserContext.Provider>

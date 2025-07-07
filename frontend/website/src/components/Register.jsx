@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    toast.dismiss();
     console.log('Register data:', formData);
 
     try {
@@ -38,7 +40,7 @@ const Register = () => {
       });
 
       const data = await res.json();
-      alert(data.message);
+      toast[data.message === "User registered successfully" ? "success" : "error"](data.message);
       if (data.message === "User registered successfully") {
         setUser(data);
         setIsAuthenticated(true);
