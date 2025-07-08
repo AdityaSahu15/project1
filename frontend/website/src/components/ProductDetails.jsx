@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import { toast } from 'react-hot-toast';
 
 
 const ProductDetails = () => {
@@ -41,6 +42,13 @@ const ProductDetails = () => {
       credentials: "include"
     });
 
+    
+          if(res.ok)
+          {
+            toast.dismiss(); 
+            toast.success("Item added to Cart successfully")
+          }
+
     const data = await res.json();
     console.log(data);
   };
@@ -55,7 +63,7 @@ const ProductDetails = () => {
           <img
             src={product.productImage}
             alt={product.productName}
-            className="h-72 w-full object-contain rounded-lg "
+            className="h-72 w-full object-contain rounded-lg  transition-transform duration-300 ease-in-out hover:scale-110 cursor-pointer"
           />
         </div>
 

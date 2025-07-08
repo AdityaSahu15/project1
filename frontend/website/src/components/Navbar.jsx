@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import cart from '../photos/cart.png';
-import login from '../photos/login.jpeg';
 import logo from '../photos/logo.png';
+import home from '../photos/home.png';
+import shoppingBag from '../photos/shopping-bag.png';
+import userImage from '../photos/userImage.png';
 import { UserContext } from '../UserContext';
 import { useContext, useState, useEffect } from 'react';
 
@@ -31,9 +33,12 @@ function Navbar() {
       </div>
 
       <div className="flex items-center gap-8 ml-10">
+        <div className='flex items-center gap-1.5'>
+          <img src={home} alt="logo" className='w-7 h-6 rounded' />
         <NavLink to="/home" className='hover:text-yellow-300 transition font-medium'>
           Home
         </NavLink>
+        </div>
 
         <form>
           <input
@@ -45,22 +50,26 @@ function Navbar() {
           />
         </form>
 
-        <div className='flex items-center gap-2 hover:text-yellow-300 transition'>
-          <img src={login} alt="login" className='w-8 h-8 rounded-full shadow' />
+        <div className='flex items-center gap-0.5 hover:text-yellow-300 transition'>
+          <img src={userImage} alt="user" className='w-7 h-6 rounded ' />
           <NavLink to={user ? "/login/userInfo" : "/login"} className='font-medium'>
             {user ? "Profile" : "User"}
           </NavLink>
         </div>
 
+        
+        <div className='flex items-center gap-0.5'>
+          <img src={shoppingBag} alt="orders" className='w-7 h-6 rounded ' />
         <NavLink to='/orders' className='hover:text-yellow-300 transition font-medium'>
           Orders
         </NavLink>
+        </div>
 
-        <div className='flex items-center gap-2 hover:text-yellow-300 transition'>
+        <div className='flex items-center gap-0.5  hover:text-yellow-300 transition'>
+          <img src={cart} alt="cart" className='w-7 h-6 ' />
           <NavLink to='/cart' className='font-medium'>
             Cart
           </NavLink>
-          <img src={cart} alt="cart" className='w-8 h-8' />
         </div>
       </div>
     </div>

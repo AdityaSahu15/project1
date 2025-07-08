@@ -62,8 +62,9 @@ const ProductPage = () => {
           <div key={product._id} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 overflow-hidden">
             <img
               src={product.productImage}
+              loading="lazy"
               alt={product.productName}
-              className="w-full h-72 object-cover"
+              className="w-full h-72 object-cover "
             />
             <div className="p-5">
               <h2 className="text-xl font-semibold text-blue-800 truncate">{product.productName}</h2>
