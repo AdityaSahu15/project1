@@ -9,7 +9,7 @@ function Layout() {
   <Toaster
   position="top-center"
   toastOptions={{
-     duration: 1000,
+     duration: 2000,
     // Default style for all toasts
     style: {
       background: '#f9f9f9', // Off-white background
