@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 import { toast } from 'react-hot-toast';
 
+
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const { user } = useContext(UserContext);
@@ -12,7 +13,8 @@ const ProductPage = () => {
       try {
         const res = await fetch("/api/products");
         const data = await res.json();
-        setProducts(data.products);
+        setProducts(data.products.sort(() => Math.random() - 0.5));
+
       } catch (err) {
         console.error("Failed to fetch products", err);
       }

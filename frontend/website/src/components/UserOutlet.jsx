@@ -107,9 +107,9 @@ const UserOutlet = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-white flex flex-col items-center justify-center px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 flex flex-col items-center justify-center px-4 py-10">
       <div className="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full border border-blue-200">
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-6">
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">
           User Dashboard
         </h2>
 
@@ -123,14 +123,14 @@ const UserOutlet = () => {
         <div className="flex flex-col sm:flex-row justify-between gap-4 mt-8">
           <button
             onClick={handleEditClick}
-            className="bg-red-500 hover:bg-red-600 text-white px-6 py-2.5 rounded-md w-full text-base font-medium cursor-pointer"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2.5 rounded-md w-full text-base font-medium cursor-pointer"
           >
             Edit
           </button>
 
           <button
             onClick={handleSaveClick}
-            className="bg-green-500 hover:bg-green-600 text-white px-6 py-2.5 rounded-md w-full text-base font-medium cursor-pointer"
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-2.5 rounded-md w-full text-base font-medium cursor-pointer"
           >
             Save
           </button>
@@ -142,7 +142,7 @@ const UserOutlet = () => {
       <div className="mt-10">
         <button
           onClick={handleLogoutClick}
-          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full text-base font-semibold shadow-md cursor-pointer mt-10"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-base font-semibold shadow-md cursor-pointer mt-10"
         >
           Log Out
         </button>

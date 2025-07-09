@@ -5,7 +5,7 @@ const Footer = () => {
 
 
   return (
-    <footer className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-6">
+    <footer className="bg-gradient-to-r from-blue-800 to-purple-800 text-white py-6">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm">
 
         {/* Left: Copyright */}
