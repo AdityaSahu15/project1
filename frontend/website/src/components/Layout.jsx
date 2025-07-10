@@ -21,7 +21,7 @@ function Layout() {
     // Success toast style
     success: {
       style: {
-        color: '#10b981', // Green text
+        color: '#059669', // Green text
       },
       iconTheme: {
         primary: '#10b981',

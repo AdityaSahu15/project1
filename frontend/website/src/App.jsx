@@ -23,6 +23,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import Contact from './components/Contact';
 import ForgotPassword from './components/ForgotPassword';
 import SearchResults from './components/SearchResults';
+import Wishlist from './components/Wishlist';
 import { Toaster } from 'react-hot-toast';
 
 
@@ -43,7 +44,7 @@ const router = createBrowserRouter(
       <Route path='/contact' element={<Contact/>}/>
       <Route path='/forgot-password' element={<ForgotPassword/>}/>
       <Route path="/products/search" element={<SearchResults />} />
-
+      <Route path="/wishlist" element={<Wishlist />} />
     </Route>
     
   )

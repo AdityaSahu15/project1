@@ -7,6 +7,9 @@ import { getAllProducts ,getProductById, searchProducts} from "./controllers/pro
 import { addToCart,getCart,updateCartQuantity,deleteCartItem } from "./controllers/cart.controller.js";
 import { getUserOrders, placeOrder } from "./controllers/order.controller.js";
 import { sendOTP, verifyOTPAndReset } from "./controllers/auth.controller.js";
+import {getWishlist, addToWishlist, removeFromWishlist,getWishlistItems} from "./controllers/wishlist.controller.js";
+
+
 const app = express();
 
 app.use(cors({
@@ -108,6 +111,14 @@ app.get('/api/order/get',verifyJWT,getUserOrders)
 
 app.post('/api/forgot-password/send-otp',sendOTP)
 app.post('/api/forgot-password/verify-otp',verifyOTPAndReset)
+
+
+app.get('/api/wishlist', verifyJWT, getWishlist);
+app.post('/api/wishlist/add', verifyJWT, addToWishlist);
+app.delete('/api/wishlist/remove', verifyJWT, removeFromWishlist);
+app.get("/api/wishlist", verifyJWT, getWishlistItems);
+
+
 
 
 

@@ -145,8 +145,8 @@ function Cart() {
 
       {!message && (
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-semibold text-blue-800 mb-8 text-center underline">
-            Your Cart
+          <h1 className="text-3xl font-bold text-blue-800 mb-8 text-center underline">
+            My Cart
           </h1>
 
           <div className="space-y-6">

@@ -5,6 +5,7 @@ import logo from '../photos/logo.png';
 import home from '../photos/home.png';
 import shoppingBag from '../photos/shopping-bag.png';
 import userImage from '../photos/userImage.png';
+import wishlist from '../photos/wishlist.png';
 import { UserContext } from '../UserContext';
 import { useContext, useState, useEffect } from 'react';
 
@@ -26,7 +27,7 @@ function Navbar() {
   }, [search]);
 
   return (
-    <div className='navbar sticky top-0 z-50 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-10 shadow-md text-lg flex justify-between items-center backdrop-blur-sm'>
+    <div className='navbar sticky top-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-10 shadow-md text-lg flex justify-between items-center backdrop-blur-sm'>
       <div className="flex items-center gap-3">
         <img src={logo} alt="logo" className='w-10 h-10 rounded-full shadow-md' />
         <span className="font-bold text-xl tracking-wide">ShopVerse</span>
@@ -35,9 +36,9 @@ function Navbar() {
       <div className="flex items-center gap-8 ml-10">
         <div className='flex items-center gap-1.5'>
           <img src={home} alt="logo" className='w-7 h-6 rounded' />
-        <NavLink to="/home" className='hover:text-yellow-300 transition font-medium'>
-          Home
-        </NavLink>
+          <NavLink to="/home" className='hover:text-yellow-300 transition font-medium'>
+            Home
+          </NavLink>
         </div>
 
         <form>
@@ -57,21 +58,32 @@ function Navbar() {
           </NavLink>
         </div>
 
-        
+
         <div className='flex items-center gap-0.5'>
           <img src={shoppingBag} alt="orders" className='w-7 h-6 rounded ' />
-        <NavLink to='/orders' className='hover:text-yellow-300 transition font-medium'>
-          Orders
-        </NavLink>
+          <NavLink to='/orders' className='hover:text-yellow-300 transition font-medium'>
+            Orders
+          </NavLink>
         </div>
 
-        <div className='flex items-center gap-0.5  hover:text-yellow-300 transition'>
+        <div className='flex items-center gap-0.5 '>
           <img src={cart} alt="cart" className='w-7 h-6 ' />
-          <NavLink to='/cart' className='font-medium'>
+          <NavLink to='/cart' className='font-medium  hover:text-yellow-300 transition'>
             Cart
           </NavLink>
         </div>
+
+        <div className='flex items-center gap-0.5'>
+          <img src={wishlist} alt="cart" className='w-7 h-6 ' />
+        <NavLink to="/wishlist" className='font-medium  hover:text-yellow-300 transition'>
+          Wishlist
+        </NavLink>
+        </div>
+        
+
       </div>
+
+
     </div>
   );
 }
