@@ -65,7 +65,7 @@ const Orders = () => {
     }
   }, [user, navigate, loading]);
 
-  // ✅ Loading state
+  
   if (!loading) {
     return <p className="text-center mt-10 text-blue-500">Loading orders...</p>;
   }
@@ -81,7 +81,7 @@ const Orders = () => {
       )}
 
       {!message && orders.length === 0 ? (
-        <p className="text-center text-gray-600 text-lg">
+        <p className="text-center text-gray-700 text-xl font-medium">
           You haven’t placed any orders yet.
         </p>
       ) : (

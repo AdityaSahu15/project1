@@ -81,7 +81,7 @@ const Wishlist = () => {
       </h1>
 
       {wishlist.length === 0 ? (
-        <p className="text-center text-gray-700 text-lg font-medium">
+        <p className="text-center text-gray-700 text-xl font-medium">
           No items in wishlist yet. Start exploring and save your favorites!
         </p>
       ) : (

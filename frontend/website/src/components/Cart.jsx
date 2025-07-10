@@ -138,7 +138,7 @@ function Cart() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 py-8 px-4">
       {message && (
-        <p className="text-center text-blue-700 text-lg font-semibold mt-10 animate-pulse">
+        <p className="text-center text-blue-700 text-xl font-semibold mt-10 animate-pulse">
           {message}
         </p>
       )}

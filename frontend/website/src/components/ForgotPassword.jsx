@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -37,6 +38,11 @@ const ForgotPassword = () => {
   };
 
   const verifyAndReset = async () => {
+      if (newPassword.length < 8) {
+      toast.error("Password must be 8+ characters");
+      return;
+    }
+
     try {
       const res = await fetch("/api/forgot-password/verify-otp", {
         method: "POST",
