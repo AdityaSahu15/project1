@@ -13,6 +13,9 @@ const Wishlist = () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
+         headers: {
+    "Content-Type": "application/json"
+  },
         credentials: "include",
       });
       const data = await res.json();
@@ -33,6 +36,9 @@ const Wishlist = () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
         method: "GET",
+         headers: {
+    "Content-Type": "application/json"
+  },
         credentials: "include",
       });
       const data = await res.json();

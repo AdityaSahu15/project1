@@ -11,7 +11,12 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = awaitfetch(`${import.meta.env.VITE_API_URL}/api/products`);
+        const res = awaitfetch(`${import.meta.env.VITE_API_URL}/api/products`,{
+          method:"GET",
+           headers: {
+    "Content-Type": "application/json"
+  },
+        });
         const data = await res.json();
         setProducts(data.products.sort(() => Math.random() - 0.5));
       } catch (err) {
@@ -24,6 +29,9 @@ const ProductPage = () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
           method: "GET",
+           headers: {
+    "Content-Type": "application/json"
+  },
           credentials: "include",
         });
         const data = await res.json();

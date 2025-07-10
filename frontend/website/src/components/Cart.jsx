@@ -30,7 +30,11 @@ function Cart() {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: 'GET',
+         headers: {
+    "Content-Type": "application/json"
+  },
         credentials: 'include',
+
       });
       const data = await res.json();
       if (res.ok) setUser(data?.data);
@@ -58,6 +62,9 @@ function Cart() {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart`, {
         method: 'GET',
+         headers: {
+    "Content-Type": "application/json"
+  },
         credentials: 'include',
       });
       const data = await res.json();

@@ -17,11 +17,11 @@ const ForgotPassword = () => {
     setLoadingOtp(true); // start loader
     setMessage("");
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api
-/forgot-password/send-otp`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/forgot-password/send-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
+        credentials:"include"
       });
 
       const data = await res.json();
@@ -49,6 +49,7 @@ const ForgotPassword = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp, newPassword }),
+        credentials:"include"
       });
 
       const data = await res.json();

@@ -17,6 +17,9 @@ const UserOutlet = () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
+         headers: {
+    "Content-Type": "application/json"
+  },
         credentials: "include",
       });
 

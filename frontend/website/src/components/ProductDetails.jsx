@@ -13,7 +13,13 @@ const ProductDetails = () => {
 
   const fetchProduct = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`,{
+        method:"GET",
+         headers: {
+    "Content-Type": "application/json"
+  },
+  credentials:"include"
+      });
       const data = await res.json();
       console.log(data);
       setProduct(data.product);
