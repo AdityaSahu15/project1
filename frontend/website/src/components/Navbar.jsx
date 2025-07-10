@@ -6,6 +6,7 @@ import home from '../photos/home.png';
 import shoppingBag from '../photos/shopping-bag.png';
 import userImage from '../photos/userImage.png';
 import wishlist from '../photos/wishlist.png';
+import product from '../photos/product.png';
 import { UserContext } from '../UserContext';
 import { useContext, useState, useEffect } from 'react';
 
@@ -38,6 +39,13 @@ function Navbar() {
           <img src={home} alt="logo" className='w-7 h-6 rounded' />
           <NavLink to="/home" className='hover:text-yellow-300 transition font-medium'>
             Home
+          </NavLink>
+        </div>
+
+         <div className='flex items-center gap-1.5'>
+          <img src={product} alt="logo" className='w-7 h-6 rounded' />
+          <NavLink to="/products" className='hover:text-yellow-300 transition font-medium'>
+            Products
           </NavLink>
         </div>
 

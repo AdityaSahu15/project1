@@ -152,4 +152,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default React.memo(ProductPage);

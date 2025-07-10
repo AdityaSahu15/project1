@@ -27,28 +27,40 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    toast.dismiss();
-    console.log('Register data:', formData);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  toast.dismiss();
 
-    try {
-      const res = await fetch('/api/login/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    toast.error("Please enter a valid email address");
+    return;
+  }
 
-      const data = await res.json();
-      toast[data.message === "User registered successfully" ? "success" : "error"](data.message);
-      if (data.message === "User registered successfully") {
-        setUser(data);
-        setIsAuthenticated(true);
-      }
-    } catch (err) {
-      console.error('Error sending data:', err);
+  if (formData.password.length < 8) {
+    toast.error("Password must be 8+ characters");
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/login/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    toast[data.message === "User registered successfully" ? "success" : "error"](data.message);
+    if (data.message === "User registered successfully") {
+      setUser(data);
+      setIsAuthenticated(true);
     }
-  };
+  } catch (err) {
+    console.error('Error sending data:', err);
+    toast.error("Something went wrong. Please try again.");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-white px-4 py-10">
