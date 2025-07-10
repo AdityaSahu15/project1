@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   const fetchProduct = async () => {
     try {
-      const res = await fetch(`/api/products/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`);
       const data = await res.json();
       console.log(data);
       setProduct(data.product);
@@ -33,7 +33,7 @@ const ProductDetails = () => {
       return;
     }
 
-    const res = await fetch('/api/cart/add', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

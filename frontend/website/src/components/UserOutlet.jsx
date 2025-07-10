@@ -15,7 +15,7 @@ const UserOutlet = () => {
 
   const verifyUser = async () => {
     try {
-      const res = await fetch('/api/login/userInfo', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
         credentials: "include",
       });
@@ -55,7 +55,7 @@ const UserOutlet = () => {
     console.log("Saving:", field, inputValue);
 
     try {
-      const res = await fetch('/api/login/userInfo', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const UserOutlet = () => {
   };
 
   const handleLogoutClick = async () => {
-    const res = await fetch('/api/login/userInfo/logout', {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

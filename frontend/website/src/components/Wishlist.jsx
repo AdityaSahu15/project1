@@ -11,7 +11,7 @@ const Wishlist = () => {
 
   const verifyUser = async () => {
     try {
-      const res = await fetch("/api/login/userInfo", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
         credentials: "include",
       });
@@ -31,7 +31,7 @@ const Wishlist = () => {
 
   const fetchWishlist = async () => {
     try {
-      const res = await fetch("/api/wishlist", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
         method: "GET",
         credentials: "include",
       });
@@ -53,7 +53,7 @@ const Wishlist = () => {
 
   const removeFromWishlist = async (productId) => {
     try {
-      const res = await fetch("/api/wishlist/remove", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/remove`, {
         method: "DELETE",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

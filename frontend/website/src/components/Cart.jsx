@@ -28,7 +28,7 @@ function Cart() {
 
   const verifyUser = async () => {
     try {
-      const res = await fetch('/api/login/userInfo', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -56,7 +56,7 @@ function Cart() {
 
   const fetchCart = async () => {
     try {
-      const res = await fetch('/api/cart', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -77,7 +77,7 @@ function Cart() {
 
   const updateQuantity = async (productId, type) => {
     try {
-      await fetch('/api/cart/update', {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/cart/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -91,7 +91,7 @@ function Cart() {
 
   const deleteItem = async (productId) => {
     try {
-      const res = await fetch('/api/cart/delete', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/delete`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -110,7 +110,7 @@ function Cart() {
     console.log("Sending address from frontend:", address);
 
     try {
-      const res = await fetch('/api/order/place', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/order/place`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -224,38 +224,38 @@ function Cart() {
 
           {showAddressForm && (
             <div className="mt-10 bg-white p-8 rounded-2xl shadow-xl border border-purple-200">
-  <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center ">
-    Enter Shipping Address
-  </h2>
+              <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center ">
+                Enter Shipping Address
+              </h2>
 
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {['fullName', 'street', 'city', 'state', 'zipCode', 'country', 'phone'].map((field) => (
-      <div key={field} className="flex flex-col">
-        <label className="text-gray-700 font-medium mb-1">
-          {field[0].toUpperCase() + field.slice(1)}
-        </label>
-        <input
-          type="text"
-          name={field}
-          value={address[field]}
-          onChange={handleAddressChange}
-          placeholder={`Enter ${field}`}
-          className="border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 rounded-lg p-2 text-gray-800 placeholder-gray-400 shadow-sm transition"
-          required
-        />
-      </div>
-    ))}
-  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {['fullName', 'street', 'city', 'state', 'zipCode', 'country', 'phone'].map((field) => (
+                  <div key={field} className="flex flex-col">
+                    <label className="text-gray-700 font-medium mb-1">
+                      {field[0].toUpperCase() + field.slice(1)}
+                    </label>
+                    <input
+                      type="text"
+                      name={field}
+                      value={address[field]}
+                      onChange={handleAddressChange}
+                      placeholder={`Enter ${field}`}
+                      className="border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 rounded-lg p-2 text-gray-800 placeholder-gray-400 shadow-sm transition"
+                      required
+                    />
+                  </div>
+                ))}
+              </div>
 
-  <div className="flex justify-center mt-8">
-    <button
-      onClick={buyItems}
-      className="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition-transform transform hover:scale-105 cursor-pointer"
-    >
-      Confirm & Place Order
-    </button>
-  </div>
-</div>
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={buyItems}
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-3 rounded-full shadow-md transition-transform transform hover:scale-105 cursor-pointer"
+                >
+                  Confirm & Place Order
+                </button>
+              </div>
+            </div>
 
           )}
         </div>

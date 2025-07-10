@@ -10,10 +10,10 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState("");
 
-  // ✅ Verify user
+
   const verifyUser = async () => {
     try {
-      const res = await fetch("/api/login/userInfo", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
         credentials: "include",
       });
@@ -28,11 +28,9 @@ const Orders = () => {
   };
 
 
-
-  // ✅ Fetch user orders
   const fetchOrders = async () => {
     try {
-      const res = await fetch("/api/order/get", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/order/get`, {
         method: "GET",
         credentials: "include",
       });

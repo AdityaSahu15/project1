@@ -11,7 +11,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/products");
+        const res = awaitfetch(`${import.meta.env.VITE_API_URL}/api/products`);
         const data = await res.json();
         setProducts(data.products.sort(() => Math.random() - 0.5));
       } catch (err) {
@@ -22,7 +22,7 @@ const ProductPage = () => {
     const fetchWishlist = async () => {
       if (!user) return;
       try {
-        const res = await fetch("/api/wishlist", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist`, {
           method: "GET",
           credentials: "include",
         });
@@ -45,7 +45,7 @@ const ProductPage = () => {
     }
 
     try {
-      const res = await fetch('/api/cart/add', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const ProductPage = () => {
   const isInWishlist = wishlist.includes(productId);
 
   try {
-    const res = await fetch(`/api/wishlist/${isInWishlist ? "remove" : "add"}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/wishlist/${isInWishlist ? "remove" : "add"}`, {
       method: isInWishlist ? 'DELETE' : 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

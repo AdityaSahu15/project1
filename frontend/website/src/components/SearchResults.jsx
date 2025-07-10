@@ -48,7 +48,7 @@ const SearchResults = () => {
 
   const fetchResults = async () => {
     try {
-      const res = await fetch(`/api/products/search?query=${encodeURIComponent(query)}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/search?query=${encodeURIComponent(query)}`);
       const data = await res.json();
       setResults(data.products || []);
     } catch (error) {
@@ -76,7 +76,7 @@ const SearchResults = () => {
     }
 
     try {
-      const res = await fetch('/api/cart/add', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
