@@ -61,7 +61,7 @@ function App() {
 useEffect(() => {
   const fetchUser = async () => {
     try {
-      const res = await fetch("/api/login/userInfo", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/userInfo`, {
         method: "GET",
         credentials: "include",
       });
